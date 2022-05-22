@@ -106,4 +106,4 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return render_template('/home/Pacil142857/MetaCriticleindex.html')
+    return render_template('/home/Pacil142857/templates/MetaCriticleindex.html')
