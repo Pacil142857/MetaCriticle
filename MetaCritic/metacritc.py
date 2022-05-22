@@ -7,6 +7,7 @@ import time
 start_time = time.time()
 scraper = MetaCriticScraper(sys.argv[1])
 elapsed_time = time.time() - start_time
+'''
 print("URL: " + scraper.game['url'])
 print("Image: " + scraper.game['image'])
 print("Title: " + scraper.game['title'])
@@ -20,3 +21,4 @@ print("Developer: " + scraper.game['developer'])
 print("Genre: " + scraper.game['genre'])
 print("Rating: " + scraper.game['rating'])
 print("Time to scrape: ", round(elapsed_time, 2), "secs")
+'''

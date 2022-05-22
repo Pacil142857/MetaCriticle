@@ -56,7 +56,7 @@ def getGames():
             urls.remove(curGame)
             
     # Get the distractor games
-    distractorGames = random.sample(urls, 20)
+    distractorGames = [MetaCriticScraper(game) for game in random.sample(urls, 20)]
     
     return [solutionGames, distractorGames]
 
@@ -79,3 +79,5 @@ def checkResponse(response, solution):
         # The game is not in the solution
         else:
             feedback.append(0)
+    
+    return feedback
