@@ -41,7 +41,7 @@ class MetaCriticScraper:
 			self.game['title'] = product_title_div.a.text.strip()
 			#self.game['platform'] = product_title_div.span.a.text.strip()
 		except:
-			print("WARNING: Problem getting title and platform information")
+			#print("WARNING: Problem getting title and platform information")
 			pass
 			
 		# Get publisher and release date. 
@@ -50,7 +50,7 @@ class MetaCriticScraper:
 			self.game['release_date'] = self.soup.find("li", class_="summary_detail release_data").find("span", class_="data").text.strip()
 			#datetime.strptime(release_date.strip(), "%b %d, %Y")
 		except:
-			print("WARNING: Problem getting publisher and release date information")
+			#print("WARNING: Problem getting publisher and release date information")
 			pass
 			
 		# Get critic information
@@ -64,8 +64,8 @@ class MetaCriticScraper:
 			self.game['critic_score'] = js['aggregateRating']['ratingValue']
 			self.game['critic_count'] = js['aggregateRating']['ratingCount']
 		except Exception as e:
-			print(e)
-			print("WARNING: Problem getting critic score information")
+			#print(e)
+			#print("WARNING: Problem getting critic score information")
 			pass
 			
 		# Get user information
@@ -79,7 +79,7 @@ class MetaCriticScraper:
 				if c.isdigit(): user_count += c
 			self.game['user_count'] = user_count.strip()
 		except:
-			print("WARNING: Problem getting user score information")
+			#print("WARNING: Problem getting user score information")
 			pass
 				
 		# Get remaining information

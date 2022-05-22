@@ -1,6 +1,6 @@
 import random
 from flask import Flask, flash, redirect, render_template, request, session
-from functools import wraps
+import time
 from MetaCritic.MetaCriticScraper import MetaCriticScraper
 from tempfile import mkdtemp
 
@@ -15,6 +15,7 @@ urls = ['https://www.metacritic.com/game/nintendo-64/tony-hawks-pro-skater-2',
         'https://www.metacritic.com/game/nintendo-64/pokemon-snap',
         'https://www.metacritic.com/game/nintendo-64/super-smash-bros',
         'https://www.metacritic.com/game/wii/super-mario-galaxy',
+        'https://www.metacritic.com/game/wii/super-smash-bros-brawl',
         'https://www.metacritic.com/game/wii/the-legend-of-zelda-skyward-sword',
         'https://www.metacritic.com/game/wii/xenoblade-chronicles',
         'https://www.metacritic.com/game/wii/rayman-origins',
@@ -31,7 +32,13 @@ urls = ['https://www.metacritic.com/game/nintendo-64/tony-hawks-pro-skater-2',
         'https://www.metacritic.com/game/pc/team-fortress-2',
         'https://www.metacritic.com/game/ios/bloons-td-5',
         'https://www.metacritic.com/game/playstation-4/xcom-2',
-        'https://www.metacritic.com/game/switch/return-of-the-obra-dinn']
+        'https://www.metacritic.com/game/switch/return-of-the-obra-dinn',
+        'https://www.metacritic.com/game/playstation-4/persona-4-arena-ultimax',
+        'https://www.metacritic.com/game/playstation-4/red-dead-redemption-2',
+        'https://www.metacritic.com/game/playstation-4/god-of-war',
+        'https://www.metacritic.com/game/playstation-4/persona-5',
+        'https://www.metacritic.com/game/playstation-4/puyo-puyo-tetris-2',
+        'https://www.metacritic.com/game/playstation-4/lego-dc-super-villains']
 
 # Get the solution games and distractor games
 # Format: [solutionGames, distractorGames]
@@ -59,6 +66,28 @@ def getGames():
             
     # Get the distractor games
     distractorGames = [MetaCriticScraper(game) for game in random.sample(urls, 20)]
+    for game in distractorGames:
+        if game.game['title'] == '':
+            distractorGames.remove(game)
+    
+    
+    # Update solution games
+    for game in solutionGames:
+        if game.game['title'] == '':
+            solutionGames.remove(game)
+            solutionGames.append(MetaCriticScraper(random.choice(urls)))
+
+    '''
+    while len(distractorGames) < 20:
+        newGame = random.choice(urls)
+        metaGame = MetaCriticScraper(game)
+        time.sleep(2)
+        if metaGame.game['title'] == '':
+            print(newGame)
+            continue
+        
+        distractorGames.append(metaGame)
+        urls.remove(newGame)'''
     
     return [solutionGames, distractorGames]
 
@@ -99,6 +128,8 @@ def intInput(prompt, min, max):
     
     return uInput
 
+print('Welcome to MetaCriticle! Try to find the correct MetaScore of the games!')
+print('It works similar to Wordle. A "?" signifies a "yellow" game, while a number signifies a game\'s position')
 gameEnded = False
 confirmSelection = False
 userSelection = []
@@ -106,10 +137,12 @@ solution, distractors = getGames()
 games = [item.game['title'] for item in solution] + [item.game['title'] for item in distractors]
 games.sort()
 hints = [' '] * 26
+check = []
 
 # Main loop
-print(games)
-while not gameEnded:
+tries = 0
+while not gameEnded and tries < 6 and check != [2, 2, 2, 2, 2, 2]:
+    tries += 1
     # Print the available games
     for i in range(len(games)):
         print(f'[{hints[i]}] {i + 1}: {games[i]}')
@@ -129,11 +162,20 @@ while not gameEnded:
             del hints[games.index(userSelection[i])]
             games.remove(userSelection[i])
         elif hint == 1:
-            hints[games.index(userSelection[i])] = '?'
+            curHint = hints[games.index(userSelection[i])]
+            if curHint == ' ':
+                hints[games.index(userSelection[i])] = '?'
         elif hint == 2:
             hints[games.index(userSelection[i])] = str(i + 1)
     
     userSelection = []
+
+if check == [2, 2, 2, 2, 2, 2]:
+    print('Congratulations! You won!')
+else:
+    print('The solution was this:')
+    print([item.game['title'] for item in solution])
+    print('Better luck next time...')
 
 '''
 app = Flask(__name__)
