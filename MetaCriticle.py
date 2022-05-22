@@ -104,6 +104,6 @@ def after_request(response):
     response.headers['Pragma'] = 'no-cache'
     return response
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('/home/Pacil142857/MetaCriticleindex.html')
