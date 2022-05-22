@@ -1,8 +1,5 @@
 import random
-from flask import Flask, flash, redirect, render_template, request, session
-import time
 from MetaCritic.MetaCriticScraper import MetaCriticScraper
-from tempfile import mkdtemp
 
 urls = ['https://www.metacritic.com/game/nintendo-64/tony-hawks-pro-skater-2',
         'https://www.metacritic.com/game/nintendo-64/mario-party-3',
@@ -176,25 +173,3 @@ else:
     print('The solution was this:')
     print([item.game['title'] for item in solution])
     print('Better luck next time...')
-
-'''
-app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-
-
-# Ensure that responses aren't cached
-@app.after_request
-def after_request(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Expires'] = 0
-    response.headers['Pragma'] = 'no-cache'
-    return response
-
-@app.route('/')
-def index():
-    solution, distractors = getGames()
-    solImages = [item.game['image'] for item in solution]
-    disImages = [item.game['image'] for item in distractors]
-    images = (solImages + disImages).sort()
-    return render_template('index.html', images=images)
-'''
