@@ -46,7 +46,7 @@ def getGames():
         
         # Ensure this game has a unique score
         for game in solutionGames[:-1]:
-            if (game['critic_score'] == solutionGames[-1]['critic_score']):
+            if (game.game['critic_score'] == solutionGames[-1].game['critic_score']):
                 solutionGames.pop()
                 scoreUnique = False
                 break
@@ -61,3 +61,21 @@ def getGames():
     return [solutionGames, distractorGames]
 
 
+# Check if a response is correct or not
+# Returns an array of numbers: 0s are gray, 1s are yellow, and 2s are green
+def checkResponse(response, solution):
+    feedback = []
+    solutionTitles = [game.game['title'] for game in solution]
+    responseTitles = [game.game['title'] for game in response]
+    
+    for i in range(len(response)):
+        # Check if this part of the response is correct
+        if responseTitles[i] == solutionTitles[i]:
+            feedback.append(2)
+            continue
+        # Check if the game appears somewhere in the solution
+        elif responseTitles[i] in solutionTitles:
+            feedback.append(1)
+        # The game is not in the solution
+        else:
+            feedback.append(0)
