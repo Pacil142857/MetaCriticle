@@ -21,7 +21,15 @@ urls = ['https://www.metacritic.com/game/nintendo-64/tony-hawks-pro-skater-2',
         'https://www.metacritic.com/game/wii/lego-star-wars-the-complete-saga',
         'https://www.metacritic.com/game/wii/wii-sports-resort',
         'https://www.metacritic.com/game/wii/mario-party-9',
-        'https://www.metacritic.com/game/wii/animal-crossing-city-folk']
+        'https://www.metacritic.com/game/wii/animal-crossing-city-folk',
+        'https://www.metacritic.com/game/pc/speedrunners',
+        'https://www.metacritic.com/game/pc/valkyria-chronicles',
+        'https://www.metacritic.com/game/pc/among-us',
+        'https://www.metacritic.com/game/playstation-4/fall-guys-ultimate-knockout',
+        'https://www.metacritic.com/game/pc/team-fortress-2',
+        'https://www.metacritic.com/game/ios/bloons-td-5',
+        'https://www.metacritic.com/game/playstation-4/xcom-2',
+        'https://www.metacritic.com/game/switch/return-of-the-obra-dinn']
 
 # Get the solution games and distractor games
 # Format: [solutionGames, distractorGames]
