@@ -56,7 +56,7 @@ class MetaCriticScraper:
 		# Get critic information
 		try:
 			res = self.soup.find("script",type="application/ld+json")
-			print(res.string)
+			#print(res.string)
 			js = json.loads(res.string)
 			self.game['image'] = js['image']
 			self.game['platform'] = js['gamePlatform']
@@ -89,5 +89,5 @@ class MetaCriticScraper:
 			self.game['genre'] = product_info.find("li", class_="summary_detail product_genre").find("span", class_="data").text.strip()
 			self.game['rating'] = product_info.find("li", class_="summary_detail product_rating").find("span", class_="data").text.strip()
 		except:
-			print("WARNING: Problem getting miscellaneous game information")
+			#print("WARNING: Problem getting miscellaneous game information")
 			pass
