@@ -132,6 +132,7 @@ confirmSelection = False
 userSelection = []
 solution, distractors = getGames()
 games = [item.game['title'] for item in solution] + [item.game['title'] for item in distractors]
+games = list(set(games)) # remove duplicates
 games.sort()
 hints = [' '] * 26
 check = []
