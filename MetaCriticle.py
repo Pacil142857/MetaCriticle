@@ -1,7 +1,9 @@
 import random
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
+from functools import wraps
 from MetaCritic.MetaCriticScraper import MetaCriticScraper
+from tempfile import mkdtemp
 
 urls = ['https://www.metacritic.com/game/nintendo-64/tony-hawks-pro-skater-2',
         'https://www.metacritic.com/game/nintendo-64/mario-party-3',
