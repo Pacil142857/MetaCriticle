@@ -99,4 +99,8 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    solution, distractors = getGames()
+    solImages = [item.game['image'] for item in solution]
+    disImages = [item.game['image'] for item in distractors]
+    images = (solImages + disImages).sort()
+    return render_template('index.html', images=images)

@@ -14,5 +14,19 @@
                 <span class='navbar-toggler-icon'></span>
             </button>
         </nav>
+
+        {% for image in images %}
+            <div class="bubble-r-box" style="height: 45px; left: 212px; width: 65px;">
+                <div class="bubble-element Group" style="position: absolute; box-sizing: border-box; z-index: 17; height: 45px; width: 65px; left: 0px; top: 0px; background-color: rgb(129, 131, 132); border-radius: 2px;">
+                <div class="bubble-r-line" style="margin-top: 0px; height: 45px;">
+                    <div class="bubble-r-box" style="height: 45px; left: 0px; width: 65px;">
+                        <div class="bubble-element Text clickable-element" style="position: absolute; box-sizing: border-box; z-index: 2; height: 45px; width: 65px; left: 0px; top: 0px; white-space: pre-wrap; overflow: visible; font-family: &quot;Open Sans&quot;; font-size: 10px; font-weight: bold; color: rgb(255, 255, 255); text-align: center; line-height: 1; padding-top: 10px; border-radius: 0px; cursor: pointer; padding-bottom: 10px;" tabindex="23">
+                            <div class="content"><img src={{ image }}></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div> 
+        {% endfor %}
     </body>
 </html>
